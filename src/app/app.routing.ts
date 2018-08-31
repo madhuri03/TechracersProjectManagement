@@ -4,14 +4,8 @@ import { AppComponent } from './app.component';
 
 const appRoutes: Routes = [
   {path: 'login', loadChildren: './login/login.module#LoginModule'},
+  {path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'},
   {path: '**', redirectTo: '/login'}
 ];
 
-@NgModule({
-  imports: [
-    RouterModule.forRoot(appRoutes, { enableTracing: true })
-  ],
-  exports: [RouterModule]
-})
-
-export class AppRoutingModule { }
+export const appRouting = RouterModule.forRoot(appRoutes, { enableTracing: true })
