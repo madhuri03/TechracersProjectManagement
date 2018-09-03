@@ -2,29 +2,33 @@
   <div class="card card-login mx-auto mt-5">
     <div class="card-header">Login</div>
     <div class="card-body">
-      <form>
-        <div class="form-group">
-          <div class="form-label-group">
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
-            <label for="inputEmail">Email address</label>
+
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="text-danger" *ngIf="submitted && invalidAdmin"> You have enter wrong email or password</div>
+
+        <div formGroupName="userData">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input class="form-control" formControlName="email" type="email"  placeholder="Enter email">
+            <div class="text-danger" *ngIf="loginForm.controls['userData']['controls']['email'].invalid && submitted"> Email Required </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="form-label-group">
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
-            <label for="inputPassword">Password</label>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input class="form-control" formControlName="password" type="password" placeholder="Password">
+            <span class="text-danger" *ngIf="loginForm.controls['userData']['controls']['password'].invalid
+                                            && submitted"> Password Required </span>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value="remember-me">
-              Remember Password
-            </label>
+          <div class="form-group">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox"> Remember Password</label>
+            </div>
           </div>
+
         </div>
-        <a class="btn btn-primary btn-block" (click)="login()">Login</a>
+        <button class="btn btn-primary btn-block"s>Login</button>
       </form>
+
       <div class="text-center">
         <a class="d-block small mt-3" href="register.html">Register an Account</a>
         <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
